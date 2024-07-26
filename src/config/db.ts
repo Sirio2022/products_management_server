@@ -17,7 +17,7 @@ const db = new Sequelize(
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
     logging: false,
-    models: [__dirname + '/../models/**/*.model.ts'],
+    models: [__dirname + '/../models/**/*'],
   }
 );
 
