@@ -40,7 +40,7 @@ const options: swaggerJSDoc.Options = {
     },
   },
 
-  apis: ['./src/routes/*', './src/swagger/*'],
+  apis: ['./src/routes/*.ts', './src/swagger/*.ts'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
