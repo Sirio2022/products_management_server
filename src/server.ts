@@ -31,11 +31,7 @@ server.use(express.json());
 // Enable CORS
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    //console.log(origin); // Here we can see the origin of the request. In this case, it's the postman request. And the origin is undefined.
-
-    const whiteList = [process.env.FRONTEND_URL as string, 'https://products-management-client.vercel.app'];
-
-    if (whiteList.includes(origin)) {
+    if (origin === process.env.FRONTEND_URL) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
@@ -49,5 +45,17 @@ server.use(morgan('dev'));
 
 // Routes
 server.use('/api/products', productRoutes);
+
+// For testing
+server.get('/api', (req, res) => {
+  res.json({ message: 'API is running...' });
+});
+
+// Documentation
+server.use(
+  '/api-docs',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, swaggerUiOptions)
+);
 
 export default server;
