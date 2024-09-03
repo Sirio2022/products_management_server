@@ -31,7 +31,11 @@ server.use(express.json());
 // Enable CORS
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    if (origin === process.env.FRONTEND_URL) {
+    //console.log(origin); // Here we can see the origin of the request. In this case, it's the postman request. And the origin is undefined.
+
+    const whiteList = [process.env.FRONTEND_URL as string];
+
+    if (whiteList.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
