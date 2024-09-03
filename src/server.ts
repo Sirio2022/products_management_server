@@ -33,7 +33,7 @@ const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
     //console.log(origin); // Here we can see the origin of the request. In this case, it's the postman request. And the origin is undefined.
 
-    const whiteList = [process.env.FRONTEND_URL as string];
+    const whiteList = [process.env.FRONTEND_URL as string, 'https://products-management-client.vercel.app'];
 
     if (whiteList.includes(origin)) {
       callback(null, true);
