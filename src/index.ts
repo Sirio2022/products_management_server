@@ -4,7 +4,7 @@ import server from './server';
 
 dotenv.config();
 
-const PORT = process.env.BACKEND_PORT || 3000;
+const PORT = process.env.BACKEND_PORT || 4000;
 
 server.listen(PORT, () => {
   console.log(colors.cyan.underline(`Server running in port ${PORT}`));
