@@ -50,16 +50,4 @@ server.use(morgan('dev'));
 // Routes
 server.use('/api/products', productRoutes);
 
-// For testing
-server.get('/api', (req, res) => {
-  res.json({ message: 'API is running...' });
-});
-
-// Documentation
-server.use(
-  '/api-docs',
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerSpec, swaggerUiOptions)
-);
-
 export default server;
