@@ -1,18 +1,19 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "ESNext",
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": false,
     "sourceMap": true,
     "esModuleInterop": true,
     "declaration": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": ["ESNext", "DOM"], // Add "DOM" to the "lib" array. This will allow you to use the DOM API in your TypeScript code.
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "resolveJsonModule": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.test.ts"]
+  "include": ["src/**/*.ts"]
 }
