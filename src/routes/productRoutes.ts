@@ -6,8 +6,8 @@ import {
   updateProduct,
   patchProduct,
   deleteProduct,
-} from '../controllers/productController';
-import { handleInputErrors, validateProductId } from '../middlewares';
+} from '../controllers/productController.js';
+import { handleInputErrors, validateProductId } from '../middlewares/index.js';
 
 const router: Router = Router();
 
