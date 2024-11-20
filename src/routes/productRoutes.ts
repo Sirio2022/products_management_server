@@ -4,7 +4,7 @@ import { handleInputValidation, validateProductId } from '../middlewares';
 
 const router: Router = Router();
 
-router.get('/', handleInputValidation, ProductController.products);
+router.get('/', ProductController.products);
 router.get('/:id', validateProductId, ProductController.productById);
 
 router.post('/', handleInputValidation, ProductController.createProduct);
