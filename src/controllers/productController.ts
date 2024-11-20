@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import Product from '../models/Product.model';
 
-const products = async (req: Request, res: Response) => {
+const products = async (req: Request, res: Response): Promise<void> => {
   const products = await Product.findAll({
     attributes: ['id', 'name', 'price', 'available'],
     order: [['name', 'ASC']],
@@ -11,13 +11,14 @@ const products = async (req: Request, res: Response) => {
   });
 };
 
-const productById = async (req: Request, res: Response) => {
+const productById = async (req: Request, res: Response): Promise<void> => {
   const product = await Product.findByPk(req.params.id, {
     attributes: ['id', 'name', 'price', 'available'],
   });
 
   if (!product) {
-    return res.status(404).json({ message: 'Product not found' });
+    res.status(404).json({ message: 'Product not found' });
+    return;
   }
 
   res.status(200).json({
@@ -25,7 +26,7 @@ const productById = async (req: Request, res: Response) => {
   });
 };
 
-const createProduct = async (req: Request, res: Response) => {
+const createProduct = async (req: Request, res: Response): Promise<void> => {
   const product = await Product.create({
     name: req.body.name,
     price: req.body.price,
@@ -38,11 +39,12 @@ const createProduct = async (req: Request, res: Response) => {
   });
 };
 
-const updateProduct = async (req: Request, res: Response) => {
+const updateProduct = async (req: Request, res: Response): Promise<void> => {
   const product = await Product.findByPk(req.params.id);
 
   if (!product) {
-    return res.status(404).json({ message: 'Product not found' });
+    res.status(404).json({ message: 'Product not found' });
+    return;
   }
 
   const updateProduct = await product.update(
@@ -64,11 +66,12 @@ const updateProduct = async (req: Request, res: Response) => {
   });
 };
 
-const patchProduct = async (req: Request, res: Response) => {
+const patchProduct = async (req: Request, res: Response): Promise<void> => {
   const product = await Product.findByPk(req.params.id);
 
   if (!product) {
-    return res.status(404).json({ message: 'Product not found' });
+    res.status(404).json({ message: 'Product not found' });
+    return;
   }
 
   product.available = !product.available;
@@ -80,11 +83,12 @@ const patchProduct = async (req: Request, res: Response) => {
   });
 };
 
-const deleteProduct = async (req: Request, res: Response) => {
+const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   const product = await Product.findByPk(req.params.id);
 
   if (!product) {
-    return res.status(404).json({ message: 'Product not found' });
+    res.status(404).json({ message: 'Product not found' });
+    return;
   }
 
   await product.destroy();
