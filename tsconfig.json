@@ -8,7 +8,6 @@
     "sourceMap": true,
     "esModuleInterop": true,
     "declaration": true,
-    "forceConsistentCasingInFileNames": true,
     "lib": ["ESNext", "DOM"], // Add "DOM" to the "lib" array. This will allow you to use the DOM API in your TypeScript code.
     "moduleResolution": "node",
     "resolveJsonModule": true,
