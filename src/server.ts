@@ -1,9 +1,9 @@
 import express, { Express } from 'express';
 import colors from 'colors';
 import cors, { CorsOptions } from 'cors';
+import { corsConfig } from './config/cors';
 import productRoutes from './routes/productRoutes';
 import dotenv from 'dotenv';
-
 
 // Load environment variables
 import db from './config/db';
@@ -29,16 +29,7 @@ const server: Express = express();
 server.use(express.json());
 
 // Enable CORS
-const corsOptions: CorsOptions = {
-  origin: function (origin, callback) {
-    if (origin === process.env.FRONTEND_URL) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-};
-server.use(cors(corsOptions));
+server.use(cors(corsConfig));
 
 server.use('/api/products', productRoutes);
 
