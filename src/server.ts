@@ -2,8 +2,13 @@ import express, { Express } from 'express';
 import colors from 'colors';
 import cors, { CorsOptions } from 'cors';
 import productRoutes from './routes/productRoutes';
+import dotenv from 'dotenv';
 
+
+// Load environment variables
 import db from './config/db';
+
+dotenv.config();
 
 // Connect to the database
 async function connectToDB() {
