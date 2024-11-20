@@ -1,11 +1,10 @@
-import dotenv from 'dotenv';
-import colors from 'colors';
 import server from './server';
+import colors from 'colors';
 
-dotenv.config();
-
-const PORT = process.env.BACKEND_PORT || 4000;
+const PORT = process.env.PORT || 4000;
 
 server.listen(PORT, () => {
-  console.log(colors.cyan.underline(`Server running in port ${PORT}`));
+  console.log(
+    colors.blue.bold(`Server is running on http://localhost:${PORT}`)
+  );
 });

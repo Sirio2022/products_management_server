@@ -1,29 +1,28 @@
-import { body, validationResult, param } from 'express-validator';
 import { Request, Response, NextFunction } from 'express';
+import { check, validationResult, param } from 'express-validator';
 
-export const handleInputErrors = async (
+export const handleInputValidation = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  // Ejecuta las validaciones
-  await body('name').notEmpty().withMessage('Name is required').run(req);
-  await body('price')
+  await check('name').notEmpty().withMessage('Name is required.').run(req);
+  await check('price')
     .isNumeric()
     .notEmpty()
-    .withMessage('Price is required')
-    .custom((value) => value > 0)
-    .withMessage('Price must be greater than 0')
+    .withMessage('Price must be a number.')
+    .custom((value) => {
+      return value > 0;
+    })
+    .withMessage('Price must be greater than 0.')
     .run(req);
 
-  // Verifica si hay errores después de la validación
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     res.status(400).json({ errors: errors.array() });
     return;
   }
 
-  // Si no hay errores, continúa con el siguiente middleware
   next();
 };
 
