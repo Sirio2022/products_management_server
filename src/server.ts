@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import colors from 'colors';
-import cors, { CorsOptions } from 'cors';
+import cors from 'cors';
 import { corsConfig } from './config/cors';
 import productRoutes from './routes/productRoutes';
 import dotenv from 'dotenv';
