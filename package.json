@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Rest API Node.js TypeScript Server",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "pnpm tsx watch src",
     "build": "tsc",
