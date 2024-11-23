@@ -1,3 +1,4 @@
+// src/models/Product.model.ts
 import { Table, Column, Model, DataType, Default } from 'sequelize-typescript';
 
 @Table({
@@ -18,10 +19,10 @@ export default class Product extends Model {
   })
   declare price: number;
 
+  @Default(true)
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
-    defaultValue: true,
   })
   declare available: boolean;
 }
