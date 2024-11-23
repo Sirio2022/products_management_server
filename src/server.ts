@@ -26,10 +26,11 @@ async function connectToDB() {
 connectToDB();
 
 const server: Express = express();
-server.use(express.json());
 
 // Enable CORS
 server.use(cors(corsConfig));
+
+server.use(express.json());
 
 server.use('/api/products', productRoutes);
 
