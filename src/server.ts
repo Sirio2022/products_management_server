@@ -29,7 +29,10 @@ const server: Express = express();
 server.use(express.json());
 
 // Enable CORS
-server.use(cors(corsConfig));
+server.use(cors({
+  origin: corsConfig.origin,
+  credentials: true,
+}));
 
 server.use('/api/products', productRoutes);
 
