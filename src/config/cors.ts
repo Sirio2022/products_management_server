@@ -12,7 +12,7 @@ if (process.argv.includes('--api')) {
 
 export const corsConfig: CorsOptions = {
   origin: function (origin, callback) {
-    if (whiteList.includes(origin)) {
+    if (whiteList.includes(origin) || !origin) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
