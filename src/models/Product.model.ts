@@ -18,10 +18,10 @@ export default class Product extends Model {
   })
   declare price: number;
 
-  @Default(true)
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
+    defaultValue: true,
   })
   declare available: boolean;
 }
