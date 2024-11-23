@@ -15,6 +15,7 @@
       "default": "./dist/index.mjs"
     }
   },
+  "bin": "./dist/cli.js",
   "scripts": {
     "dev": "pnpm tsx watch src",
     "exports": ".dist/index.mjs",
