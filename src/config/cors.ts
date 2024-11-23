@@ -7,7 +7,7 @@ const whitelist = [process.env.FRONTEND_URL!];
 
 export const corsConfig: CorsOptions = {
   origin: (origin, callback) => {
-    if (whitelist.includes(origin!)) {
+    if (whitelist.indexOf(origin!) !== -1 || !origin) {
       callback(null, true);
     } else {
       callback(new Error('Not allowed by CORS'));
