@@ -4,11 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const corsConfig: CorsOptions = {
-  origin: function (origin, callback) {
-    if (origin === process.env.FRONTEND_URL) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: process.env.CORS_ORIGIN,
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 };
