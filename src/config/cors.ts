@@ -3,8 +3,14 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+const whitelist = [process.env.FRONTEND_URL!];
+
 export const corsConfig: CorsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin!)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
 };
