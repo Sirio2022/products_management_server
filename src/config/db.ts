@@ -1,5 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import dotenv from 'dotenv';
+import 'reflect-metadata';  // Add this line. It's required by sequelize-typescript
 
 dotenv.config();
 
