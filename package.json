@@ -18,7 +18,7 @@
   "bin": "./dist/cli.js",
   "scripts": {
     "dev": "pnpm tsx watch src",
-    "build": "tsc"
+    "build": "pkgroll"
   },
   "keywords": [],
   "author": "Juan Manuel Alvarez @juanmaaldev",
