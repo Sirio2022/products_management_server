@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import colors from 'colors';
 import cors from 'cors';
 import productRoutes from './routes/productRoutes';
+import { corsConfig } from './config/cors';
 import dotenv from 'dotenv';
 
 // Load environment variables
@@ -28,11 +29,7 @@ const server: Express = express();
 server.use(express.json());
 
 // Enable CORS
-server.use(
-  cors({
-    origin: 'https://products-management-client.vercel.app',
-  })
-);
+server.use(cors(corsConfig));
 
 server.use('/api/products', productRoutes);
 
