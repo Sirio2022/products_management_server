@@ -93,20 +93,27 @@ export class ProductController {
   }
 
   static async patchProduct(req: Request, res: Response): Promise<void> {
-    const product = await Product.findByPk(req.params.id);
+    try {
+      const product = await Product.findByPk(req.params.id);
 
-    if (!product) {
-      res.status(404).json({ message: 'Product not found' });
-      return;
+      if (!product) {
+        res.status(404).json({ message: 'Product not found' });
+        return;
+      }
+
+      product.available = !product.available;
+      await product.save();
+
+      res.json({
+        data: product,
+        message: 'Availability updated successfully',
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: 'Error updating availability',
+      });
     }
-
-    product.available = !product.available;
-    await product.save();
-
-    res.json({
-      data: product,
-      message: 'Availability updated successfully',
-    });
   }
 
   static async deleteProduct(req: Request, res: Response): Promise<void> {
