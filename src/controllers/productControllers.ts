@@ -12,6 +12,7 @@ export class ProductController {
         data: products,
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         message: 'Error fetching products',
       });
