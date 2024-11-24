@@ -16,7 +16,7 @@ router.put(
   ProductController.updateProduct
 );
 
-router.patch('/:id', validateProductId, ProductController.updateProduct);
+router.patch('/:id', validateProductId, ProductController.patchProduct);
 
 router.delete('/:id', validateProductId, ProductController.deleteProduct);
 
