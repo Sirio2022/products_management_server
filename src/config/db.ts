@@ -7,7 +7,7 @@ const db = new Sequelize(process.env.POSTGRESQL_URI!, {
   dialect: 'postgres',
   protocol: 'postgres',
   logging: false,
-  models: [__dirname + '/../models/*.ts'],
+  models: [__dirname + '/../models/*'],
 });
 
 export default db;
