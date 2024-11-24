@@ -4,6 +4,6 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const corsConfig: CorsOptions = {
-  origin: 'https://products-management-client.vercel.app',
+  origin: process.env.FRONTEND_URL,
   optionsSuccessStatus: 200,
 };

@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import Product from '../models/Product.model';
 
 export class ProductController {
-  static async products(req: Request, res: Response) {
+  static async products(req: Request, res: Response): Promise<void> {
     try {
       const products = await Product.findAll({
         attributes: ['id', 'name', 'price', 'available'],
@@ -18,7 +18,7 @@ export class ProductController {
     }
   }
 
-  static async productById(req: Request, res: Response) {
+  static async productById(req: Request, res: Response): Promise<void> {
     try {
       const product = await Product.findByPk(req.params.id, {
         attributes: ['id', 'name', 'price', 'available'],
@@ -41,7 +41,7 @@ export class ProductController {
     }
   }
 
-  static async createProduct(req: Request, res: Response) {
+  static async createProduct(req: Request, res: Response): Promise<void> {
     try {
       const product = await Product.create({
         name: req.body.name,
@@ -62,7 +62,7 @@ export class ProductController {
     }
   }
 
-  static async updateProduct(req: Request, res: Response) {
+  static async updateProduct(req: Request, res: Response): Promise<void> {
     try {
       const product = await Product.findByPk(req.params.id);
 
@@ -91,7 +91,7 @@ export class ProductController {
     }
   }
 
-  static async patchProduct(req: Request, res: Response) {
+  static async patchProduct(req: Request, res: Response): Promise<void> {
     const product = await Product.findByPk(req.params.id);
 
     if (!product) {
@@ -108,7 +108,7 @@ export class ProductController {
     });
   }
 
-  static async deleteProduct(req: Request, res: Response) {
+  static async deleteProduct(req: Request, res: Response): Promise<void> {
     try {
       const product = await Product.findByPk(req.params.id);
 
