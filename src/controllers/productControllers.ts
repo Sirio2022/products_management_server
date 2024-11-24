@@ -84,6 +84,11 @@ export class ProductController {
           },
         }
       );
+
+      res.json({
+        data: updateProduct,
+        message: 'Product updated successfully',
+      });
     } catch (error) {
       console.log(error);
       res.status(500).json({
