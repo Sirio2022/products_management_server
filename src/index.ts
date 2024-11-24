@@ -1,5 +1,6 @@
 import server from './server';
 import colors from 'colors';
+import './sequelize';
 
 const PORT = process.env.PORT || 4000;
 
