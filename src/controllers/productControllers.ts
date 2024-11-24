@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Product from '../models/Product.model';
+import Product from '../models/Product';
 
 export class ProductController {
   static async products(req: Request, res: Response): Promise<void> {
