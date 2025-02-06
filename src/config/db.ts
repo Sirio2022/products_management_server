@@ -1,13 +1,13 @@
-import { Sequelize } from 'sequelize-typescript';
-import dotenv from 'dotenv';
+import { Sequelize } from 'sequelize-typescript'
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
-const db = new Sequelize(process.env.POSTGRESQL_URI!, {
+const db = new Sequelize(process.env.POSTGRESQL_URI, {
   dialect: 'postgres',
   protocol: 'postgres',
   logging: false,
-  models: [__dirname + '/../models/*'],
-});
+  models: [__dirname + '/../models/*']
+})
 
-export default db;
+export default db
