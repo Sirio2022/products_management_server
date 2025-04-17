@@ -5,6 +5,7 @@ dotenv.config()
 
 const whitelist = [
   process.env.FRONTEND_URL,
+  process.env.FRONTEND_URL_2,
   process.env.SERVOR_URL,
   process.env.APOLLO_URL,
   process.env.POSTMAN_URL
