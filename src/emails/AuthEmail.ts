@@ -20,7 +20,7 @@ export class AuthMail {
       <h1>Hello ${name}</h1>
       <p>Thank you for creating an account with us.</p>
       <p>Please confirm your account by clicking the link below:</p>
-        <a href="${process.env.FRONTEND_URL}/auth/confirm-account">Confirm Account</a>
+        <a href="${process.env.FRONTEND_URL_2}/auth/confirm-account">Confirm Account</a>
         <p>Copy and paste your token in the link below:</p>
         <strong>${token}</strong>
         <p>If you did not create an account, please ignore this email.</p>  
@@ -50,7 +50,7 @@ export class AuthMail {
       </p>
       <p>
       Please reset your password by clicking the link below:</p>
-        <a href="${process.env.FRONTEND_URL}/auth/reset-password">Reset Password</a>
+        <a href="${process.env.FRONTEND_URL_2}/auth/reset-password">Reset Password</a>
         <p>Copy and paste your token in the link below:</p>
         <strong>${token}</strong>
         <p>If you did not create an account, please ignore this email.</p>  
