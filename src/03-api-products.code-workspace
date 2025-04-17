@@ -1,0 +1,16 @@
+{
+  "folders": [
+    {
+      "name": "03-api-products",
+      "path": ".."
+    },
+    {
+      "name": "04-api-products-gql",
+      "path": "../../04-api-products-gql"
+    },
+    {
+      "path": "../../03-client"
+    }
+  ],
+  "settings": {}
+}

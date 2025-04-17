@@ -1,28 +1,86 @@
-// src/models/Product.model.ts
-import { Table, Column, Model, DataType, Default } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  IsUUID,
+  ForeignKey,
+  BelongsTo
+} from 'sequelize-typescript'
+import User from './User'
+
+export interface ProductAttributes {
+  id?: string
+  name: string
+  price: number
+  stock: number
+  active?: boolean
+  image: string
+  description: string
+  manager: string
+}
 
 @Table({
   tableName: 'products',
-  schema: 'products',
-  timestamps: true,
+  timestamps: true
 })
-export default class Product extends Model {
+export default class Product extends Model<ProductAttributes> {
+  @IsUUID(4)
   @Column({
-    type: DataType.STRING(100),
-    allowNull: false,
+    type: DataType.UUID,
+    primaryKey: true,
+    defaultValue: DataType.UUIDV4
   })
-  declare name: string;
+  declare id: string
 
   @Column({
-    type: DataType.DECIMAL(10, 2),
-    allowNull: false,
+    type: DataType.STRING,
+    allowNull: false
   })
-  declare price: number;
+  declare name: string
 
-  @Default(true)
+  @Column({
+    type: DataType.DECIMAL(15, 2),
+    allowNull: false,
+    get() {
+      const value = this.getDataValue('price')
+      return parseFloat(value)
+    }
+  })
+  declare price: number
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false
+  })
+  declare stock: number
+
   @Column({
     type: DataType.BOOLEAN,
     allowNull: false,
+    defaultValue: true
   })
-  declare available: boolean;
+  declare active: boolean
+
+  @Column({
+    type: DataType.TEXT,
+    allowNull: false
+  })
+  declare image: string
+
+  @Column({
+    type: DataType.TEXT,
+    allowNull: false
+  })
+  declare description: string
+
+  @ForeignKey(() => User)
+  @Column({
+    type: DataType.UUID,
+    allowNull: false
+  })
+  declare manager: string // Foreign key to the User table, assuming a user can manage multiple products
+
+  @BelongsTo(() => User)
+  user!: User // Define the relationship with the User model
 }

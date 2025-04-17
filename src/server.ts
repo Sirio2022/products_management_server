@@ -1,37 +1,65 @@
-import express, { Express } from 'express';
-import colors from 'colors';
-import cors from 'cors';
-import productRoutes from './routes/productRoutes';
-import { corsConfig } from './config/cors';
-import dotenv from 'dotenv';
+import express, { Express } from 'express'
+import cron from 'node-cron'
+import { Op } from 'sequelize'
+import dotenv from 'dotenv'
+import cors from 'cors'
+import { corsOptions } from './config/cors'
+import authRoutes from './routes/authRoutes'
+import productsRoutes from './routes/productsRoutes'
+import { handleCorsError } from './middlewares/handleCorsError'
+import { errorHandler } from './middlewares/errorHandler'
+import { connectDB } from './config/db'
+import { syntaxErrorHandler } from './middlewares/syntaxErrorHandler'
+import { jsonSyntaxErrorHandler } from './middlewares/jsonSyntaxErrorHandler'
+import picocolors from 'picocolors'
+import Token from './models/Token'
 
 // Load environment variables
-import db from './config/db';
+dotenv.config()
 
-dotenv.config();
+// Connect to database
+connectDB()
 
-// Connect to the database
-async function connectToDB() {
+// Initialize server
+const server: Express = express()
+server.disable('x-powered-by')
+
+// Middleware para manejar errores de sintaxis en JSON
+server.use(jsonSyntaxErrorHandler)
+
+// Middleware para manejar SyntaxError
+server.use(syntaxErrorHandler)
+
+// Middleware
+server.use(express.json())
+
+// CORS
+server.use(cors(corsOptions))
+server.use(handleCorsError)
+
+// Routes
+server.use('/api/auth', authRoutes)
+server.use('/api/products', productsRoutes)
+
+// Programa una tarea para ejecutarse cada 10 minutos
+cron.schedule('*/10 * * * *', async () => {
   try {
-    await db.authenticate();
-    db.sync();
-    console.log(
-      colors.yellow.bold('Connection to DB has been established successfully.')
-    );
+    const result = await Token.destroy({
+      where: {
+        expiredAt: {
+          [Op.lt]: new Date()
+        }
+      }
+    })
+    console.log(picocolors.magenta(`Tokens expirados eliminados: ${result}`))
   } catch (error) {
-    console.error(colors.red.bold('Unable to connect to the database:'), error);
+    console.error(
+      picocolors.redBright('Error eliminando tokens expirados:' + error)
+    )
   }
-}
+})
 
-connectToDB();
+// Error handler. Must be the last middleware
+server.use(errorHandler)
 
-const server: Express = express();
-
-// Enable CORS
-server.use(cors(corsConfig));
-
-server.use(express.json());
-
-server.use('/api/products', productRoutes);
-
-export default server;
+export default server

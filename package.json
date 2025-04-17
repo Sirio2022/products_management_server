@@ -1,58 +1,54 @@
 {
-  "name": "rest_api_node_ts_server",
+  "name": "03-api-products",
   "version": "1.0.0",
-  "description": "Rest API Node.js TypeScript Server with TSX and Express",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.cts",
-  "exports": {
-    "require": {
-      "types": "./dist/index.d.cts",
-      "default": "./dist/index.cjs"
-    },
-    "import": {
-      "types": "./dist/index.d.mts",
-      "default": "./dist/index.mjs"
-    }
-  },
-  "bin": "./dist/cli.js",
+  "description": "",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/index.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "dev": "cross-env NODE_ENV=development tsx --watch src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Juan Manuel Alvarez @juanmaaldev",
+  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/pg": "^8.11.11",
-    "@types/sequelize": "^4.28.20",
-    "colors": "^1.4.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "express-validator": "^7.2.1",
-    "nodemon": "^3.1.9",
-    "pg": "^8.14.1",
-    "pg-hstore": "^2.3.4",
-    "reflect-metadata": "^0.2.2",
-    "sequelize": "^6.37.6",
-    "sequelize-typescript": "^2.1.6",
-    "ts-node": "^10.9.2"
-  },
   "devDependencies": {
     "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.0",
-    "@types/pg": "^8.11.10",
-    "@types/sequelize": "^4.28.20",
-    "pkgroll": "^2.11.2",
+    "@types/express": "^5.0.1",
+    "@types/jsonwebtoken": "^9.0.9",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.14.0",
+    "@types/node-cron": "^3.0.11",
+    "@types/nodemailer": "^6.4.17",
+    "@types/validator": "^13.12.3",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
-  "packageManager": "pnpm@10.6.4+sha512.da3d715bfd22a9a105e6e8088cfc7826699332ded60c423b14ec613a185f1602206702ff0fe4c438cb15c979081ce4cb02568e364b15174503a63c7a8e2a5f6c",
+  "dependencies": {
+    "cloudinary": "^2.6.0",
+    "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "1.4.5-lts.1",
+    "mysql2": "^3.14.0",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.10.0",
+    "picocolors": "^1.1.1",
+    "reflect-metadata": "^0.2.2",
+    "sequelize": "^6.37.7",
+    "sequelize-typescript": "^2.1.6",
+    "zod": "^3.24.2"
+  },
+  "packageManager": "pnpm@10.8.1+sha512.c50088ba998c67b8ca8c99df8a5e02fd2ae2e2b29aaf238feaa9e124248d3f48f9fb6db2424949ff901cffbb5e0f0cc1ad6aedb602cd29450751d11c35023677",
   "pnpm": {
+    "ignoredBuiltDependencies": [
+      "esbuild"
+    ],
     "onlyBuiltDependencies": [
+      "bcrypt",
       "esbuild"
     ]
   }
