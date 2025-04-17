@@ -1,7 +1,7 @@
 {
-  "name": "products-api",
-  "version": "2.0.0",
-  "description": "Products API for managing products, categories, and orders.",
+  "name": "03-api-products",
+  "version": "1.0.0",
+  "description": "",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
