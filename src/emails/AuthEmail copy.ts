@@ -1,10 +1,4 @@
-import { Resend } from 'resend'
-
-const resend = new Resend(process.env.RESEND_API_KEY)
-
-if (!process.env.EMAIL_FROM) {
-  throw new Error('EMAIL_FROM is not defined')
-}
+import { transport } from '../config/nodemailer'
 
 interface AuthMailInterface {
   name: string
@@ -18,8 +12,8 @@ export class AuthMail {
     email,
     token
   }: AuthMailInterface) => {
-    const info = await resend.emails.send({
-      from: process.env.EMAIL_FROM!,
+    const info = await transport.sendMail({
+      from: 'Products Management <admin@prodcutsman.com>',
       to: email,
       subject: 'Confirm your account',
       html: `
@@ -36,7 +30,7 @@ export class AuthMail {
       
       `
     })
-    console.log('Message sent: %s', info.data?.id)
+    console.log('Message sent: %s', info.messageId)
   }
 
   static readonly sendPasswordResetToken = async ({
@@ -44,8 +38,8 @@ export class AuthMail {
     email,
     token
   }: AuthMailInterface) => {
-    const info = await resend.emails.send({
-      from: process.env.EMAIL_FROM!,
+    const info = await transport.sendMail({
+      from: 'Products Management <admin@prodcutsman.com>',
       to: email,
       subject: 'Reset your password',
       html: `
@@ -67,6 +61,6 @@ export class AuthMail {
       `
     })
 
-    console.log('Message sent: %s', info.data?.id)
+    console.log('Message sent: %s', info.messageId)
   }
 }
